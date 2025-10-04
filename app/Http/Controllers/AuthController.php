@@ -33,7 +33,7 @@ class AuthController extends Controller
             $role = Auth::user()->role;
 
             if ($role === 'gudang') {
-                return redirect('/admin/home');
+                return redirect('/admin/dashboard');
             } elseif ($role === 'dapur') {
                 return redirect('/client/home');
             }

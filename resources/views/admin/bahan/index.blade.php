@@ -1,45 +1,32 @@
-@extends('layouts.app')
-
+@extends('layouts.adminlayout')
 @section('content')
-<div class="container">
-    <h2>Data Bahan Baku</h2>
-    <a href="{{ url('/gudang/bahan/tambah') }}" class="btn btn-success mb-3">+ Tambah Bahan</a>
-
+<div class="container mt-5">
+    <h3>Data Bahan Baku</h3>
+    <a href="/admin/bahan/tambah" class="btn btn-primary mb-3">+ Tambah Bahan</a>
     <table class="table table-bordered">
-        <thead class="table-dark">
-            <tr>
-                <th>Nama</th>
-                <th>Kategori</th>
-                <th>Jumlah</th>
-                <th>Satuan</th>
-                <th>Tanggal Masuk</th>
-                <th>Tanggal Kadaluarsa</th>
-                <th>Status</th>
-                <th width="180px">Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($bahan as $row)
-            <tr>
-                <td>{{ $row->nama }}</td>
-                <td>{{ $row->kategori }}</td>
-                <td>{{ $row->jumlah }}</td>
-                <td>{{ $row->satuan }}</td>
-                <td>{{ $row->tanggal_masuk }}</td>
-                <td>{{ $row->tanggal_kadaluarsa }}</td>
-                <td>{{ $row->status }}</td>
-                <td>
-                    <a href="{{ url('/gudang/bahan/'.$row->id) }}" class="btn btn-info btn-sm">Detail</a>
-                    <a href="{{ url('/gudang/bahan/'.$row->id.'/edit') }}" class="btn btn-warning btn-sm">Edit</a>
-                    <form action="{{ url('/gudang/bahan/'.$row->id) }}" method="POST" style="display:inline;">
-                        @csrf
-                        @method('DELETE')
-                        <button class="btn btn-danger btn-sm" onclick="return confirm('Yakin hapus?')">Hapus</button>
-                    </form>
-                </td>
-            </tr>
-            @endforeach
-        </tbody>
+        <tr>
+            <th>Nama</th><th>Kategori</th><th>Jumlah</th><th>Satuan</th>
+            <th>Tanggal Masuk</th><th>Tanggal Kadaluarsa</th><th>Status</th><th>Aksi</th>
+        </tr>
+        @foreach($bahan as $b)
+        <tr>
+            <td>{{ $b->nama }}</td>
+            <td>{{ $b->kategori }}</td>
+            <td>{{ $b->jumlah }}</td>
+            <td>{{ $b->satuan }}</td>
+            <td>{{ $b->tanggal_masuk }}</td>
+            <td>{{ $b->tanggal_kadaluarsa }}</td>
+            <td>{{ $b->status }}</td>
+            <td>
+                <a href="/admin/bahan/{{ $b->id }}/edit" class="btn btn-warning btn-sm">Edit</a>
+                <form method="POST" action="/admin/bahan/{{ $b->id }}" style="display:inline">
+                    @csrf @method('DELETE')
+                    <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                </form>
+            </td>
+        </tr>
+        @endforeach
     </table>
 </div>
 @endsection
+
