@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 
 use App\Models\BahanBaku;
 use App\Models\Permintaan;
 use App\Models\PermintaanDetail;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 
 class ClientController extends Controller
@@ -73,5 +73,15 @@ class ClientController extends Controller
         }
 
         return redirect('/client/permintaan')->with('success', 'Permintaan berhasil dibuat');
+    }
+
+    public function action_detail_permintaan($id)
+    {
+        $permintaan = Permintaan::find($id);
+        $detail = PermintaanDetail::where('permintaan_id', $id)->get();
+        return view('client.permintaan.detail', [
+            'permintaan' => $permintaan,
+            'detail' => $detail
+        ]);
     }
 }

@@ -120,7 +120,7 @@
                     <a href="/client/permintaan"
                         class="nav-link {{ request()->is('client/permintaan') ? 'active' : '' }}">
                         <i class="bi bi-plus-circle"></i>
-                        <span>Buat Permintaan</span>
+                        <span>Data Permintaan</span>
                     </a>
                 </li>
                 <li class="nav-item mb-1">

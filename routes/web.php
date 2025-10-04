@@ -45,5 +45,6 @@ Route::middleware(['auth', 'role:dapur'])->group(function () {
         Route::get('/client/permintaan', 'index_permintaan');
         Route::get('/client/permintaan/tambah', 'index_tambah_permintaan');
         Route::post('/client/permintaan/tambah', 'action_tambah_permintaan');
+        Route::get('/client/permintaan/{id}', 'action_detail_permintaan');
     });
 });
