@@ -110,4 +110,10 @@ class AdminController extends Controller
         }
         return redirect('/admin/bahan');
     }
+
+    public function index_permintaan()
+    {
+        $permintaan = Permintaan::all();
+        return view('admin.permintaan.index', ['permintaan' => $permintaan]);
+    }
 }
