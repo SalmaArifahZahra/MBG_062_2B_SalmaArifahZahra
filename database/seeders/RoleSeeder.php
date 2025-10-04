@@ -23,8 +23,8 @@ class RoleSeeder extends Seeder
         ]);
 
         User::create([
-            'name'       => 'Salma',
-            'email'      => 'salma@gmail.com',
+            'name'       => 'Dapur C',
+            'email'      => 'dapur.c@example.com ',
             'password'   => Hash::make('123'),
             'role'       => 'dapur',
             'created_at' => now(),

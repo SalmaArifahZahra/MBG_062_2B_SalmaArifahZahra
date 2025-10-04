@@ -2,7 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ClientController;
 use App\Http\Controllers\AdminController;
+
 
 
 Route::get('/', function () {
@@ -10,10 +12,9 @@ Route::get('/', function () {
 });
 
 
-Route::get('/', [AuthController::class, 'index_login']);
-Route::get('/login', [AuthController::class, 'index_login'])->name('login');
+Route::get('/login', [AuthController::class, 'index_login']);
 Route::post('/login', [AuthController::class, 'action_login']);
-Route::middleware(['auth'])->post('/logout', [AuthController::class, 'action_logout'])->name('logout');
+Route::middleware(['auth'])->post('/logout', [AuthController::class, 'action_logout']);
 
 
 Route::middleware(['auth', 'role:gudang'])->group(function () {
@@ -34,4 +35,16 @@ Route::middleware(['auth', 'role:gudang'])->group(function () {
         Route::get('/admin/permintaan/{id}', 'action_detail_permintaan');
         Route::post('/admin/permintaan/{id}/proses', 'action_proses_permintaan');
     });
+
 });
+
+Route::middleware(['auth', 'role:dapur'])->group(function () {
+    Route::controller(ClientController::class)->group(function () {
+
+        Route::get('/client/home', 'index');
+
+        Route::get('/client/permintaan', 'index_permintaan');
+
+    });
+});
+
