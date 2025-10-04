@@ -116,4 +116,37 @@ class AdminController extends Controller
         $permintaan = Permintaan::all();
         return view('admin.permintaan.index', ['permintaan' => $permintaan]);
     }
+
+    public function action_detail_permintaan($id)
+    {
+        $permintaan = Permintaan::find($id);
+        $detail = PermintaanDetail::where('permintaan_id', $id)->get();
+        return view('admin.permintaan.detail', [
+            'permintaan' => $permintaan,
+            'detail' => $detail
+        ]);
+    }
+
+    public function action_proses_permintaan(Request $request, $id)
+    {
+        $permintaan = Permintaan::find($id);
+
+        if ($request->aksi == 'setuju') {
+            $detail = PermintaanDetail::where('permintaan_id', $id)->get();
+            foreach ($detail as $d) {
+                $bahan = BahanBaku::find($d->bahan_id);
+                $bahan->jumlah = $bahan->jumlah - $d->jumlah_diminta;
+                if ($bahan->jumlah == 0) {
+                    $bahan->status = 'habis';
+                }
+                $bahan->save();
+            }
+            $permintaan->status = 'disetujui';
+        } else {
+            $permintaan->status = 'ditolak';
+        }
+
+        $permintaan->save();
+        return redirect('/admin/permintaan');
+    }
 }

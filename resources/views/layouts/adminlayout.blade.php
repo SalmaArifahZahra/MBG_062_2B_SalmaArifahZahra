@@ -17,17 +17,15 @@
             font-family: 'Segoe UI', sans-serif;
         }
 
-        /* Sidebar */
         .sidebar {
             min-height: 100vh;
             width: 240px;
             background-color: #073b3a;
-            /* hijau tua gelap */
             color: #e0e0e0;
             padding-top: 10px;
         }
 
-        /* Header di sidebar */
+
         .sidebar-header {
             font-size: 16px;
             font-weight: 600;
@@ -38,7 +36,7 @@
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        /* Menu link */
+
         .sidebar .nav-link {
             color: #b0bec5;
             font-size: 14px;
@@ -51,16 +49,13 @@
             transition: background 0.2s, color 0.2s;
         }
 
-        /* Hover */
         .sidebar .nav-link:hover {
             background-color: rgba(255, 255, 255, 0.08);
             color: #ffffff;
         }
 
-        /* Active */
         .sidebar .nav-link.active {
             background-color: #0d9488;
-            /* hijau lebih terang untuk active */
             color: #fff;
             font-weight: 600;
         }
@@ -105,7 +100,6 @@
 
 <body>
 
-    <!-- Header -->
     <div class="header">
         <h4>Sistem Pemantauan MBG</h4>
         <div>
@@ -115,7 +109,6 @@
     </div>
 
     <div class="d-flex">
-        <!-- Sidebar -->
         <div class="sidebar" id="sidebar">
             <div class="sidebar-header">
                 <h5 class="m-0">Makan Bergizi</h5>

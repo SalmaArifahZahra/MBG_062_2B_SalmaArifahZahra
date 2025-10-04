@@ -9,9 +9,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
 Route::get('/', [AuthController::class, 'index_login']);
+Route::get('/login', [AuthController::class, 'index_login'])->name('login');
 Route::post('/login', [AuthController::class, 'action_login']);
-Route::middleware(['auth'])->post('/logout', [AuthController::class, 'action_logout']);
+Route::middleware(['auth'])->post('/logout', [AuthController::class, 'action_logout'])->name('logout');
 
 
 Route::middleware(['auth', 'role:gudang'])->group(function () {
