@@ -19,7 +19,7 @@ class User extends Authenticatable
      */
     protected $table = 'user';
     protected $primaryKey = 'id';
-    public $timestamps = false; 
+    public $timestamps = false;
 
     protected $fillable = [
         'name',
@@ -53,11 +53,5 @@ class User extends Authenticatable
             'created_at' => 'datetime',
         ];
     }
-
-    //  public function permintaan()
-    // {
-    //     return $this->hasMany(Permintaan::class, 'pemohon_id', 'id');
-    // }
-
 
 }

@@ -12,7 +12,7 @@
         <input type="text" name="kategori" value="{{ old('kategori', $bahan->kategori) }}" class="form-control">
 
         <label>Jumlah</label>
-        <input type="number" name="jumlah" value="{{ old('jumlah', $bahan->jumlah) }}" class="form-control" min="0">
+        <input type="number" name="jumlah" value="{{ old('jumlah', $bahan->jumlah) }}" class="form-control" min="1">
 
         <label>Satuan</label>
         <input type="text" name="satuan" value="{{ old('satuan', $bahan->satuan) }}" class="form-control">

@@ -44,10 +44,10 @@ class ClientController extends Controller
             'tgl_masak'     => 'required|date',
             'menu_makan'    => 'required|string|max:255',
             'jumlah_porsi'  => 'required|integer|min:1',
-            'bahan'         => 'required|array|min:1',   // minimal 1 bahan dipilih
-            'bahan.*'       => 'required|exists:bahan_baku,id', // id bahan harus ada di tabel
+            'bahan'         => 'required|array|min:1',
+            'bahan.*'       => 'required|exists:bahan_baku,id',
             'jumlah'        => 'required|array|min:1',
-            'jumlah.*'      => 'required|integer|min:1', // tiap jumlah bahan harus valid
+            'jumlah.*'      => 'required|integer|min:1', 
         ]);
 
         if ($validator->fails()) {

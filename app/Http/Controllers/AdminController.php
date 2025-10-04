@@ -73,10 +73,10 @@ class AdminController extends Controller
         $validator = Validator::make($request->all(), [
             'nama' => 'required',
             'kategori' => 'required',
-            'jumlah' => 'required|integer|min:0',
+            'jumlah' => 'required|min:1',
             'satuan' => 'required',
-            'tanggal_masuk' => 'required|date',
-            'tanggal_kadaluarsa' => 'required|date',
+            'tanggal_masuk' => 'required',
+            'tanggal_kadaluarsa' => 'required|date|after_or_equal:tanggal_masuk',
         ]);
 
         if ($validator->fails()) {
@@ -94,10 +94,10 @@ class AdminController extends Controller
         $bahan->tanggal_masuk = $request->tanggal_masuk;
         $bahan->tanggal_kadaluarsa = $request->tanggal_kadaluarsa;
 
-        if ($bahan->jumlah == 0) {
-            $bahan->status = 'habis';
-        } elseif ($bahan->tanggal_kadaluarsa < now()->toDateString()) {
+        if ($bahan->tanggal_kadaluarsa < now()->toDateString()) {
             $bahan->status = 'kadaluarsa';
+        } elseif ($bahan->jumlah == 0) {
+            $bahan->status = 'habis';
         } else {
             $bahan->status = 'tersedia';
         }
@@ -106,8 +106,6 @@ class AdminController extends Controller
 
         return redirect('/admin/bahan')->with('success', 'Data bahan berhasil diperbarui!');
     }
-
-
 
     public function action_delete_bahan($id)
     {
@@ -134,9 +132,6 @@ class AdminController extends Controller
 
         return view('admin.permintaan.detail', compact('permintaan', 'detail'));
     }
-
-
-
 
     public function action_proses_permintaan(Request $request, $id)
     {

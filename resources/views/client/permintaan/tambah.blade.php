@@ -55,7 +55,7 @@
             if (e.target.classList.contains('add-row')) {
                 let table = document.querySelector('#bahan-table tbody');
                 let row = e.target.closest('tr').cloneNode(true);
-                row.querySelector('input').value = ''; // reset jumlah
+                row.querySelector('input').value = ''; 
                 row.querySelector('button').classList.remove('btn-success', 'add-row');
                 row.querySelector('button').classList.add('btn-danger', 'remove-row');
                 row.querySelector('button').textContent = 'Hapus';
