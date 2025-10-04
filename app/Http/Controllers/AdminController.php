@@ -16,9 +16,9 @@ class AdminController extends Controller
     {
         $totalBahan = BahanBaku::count();
 
-        $permintaanMasuk = Permintaan::where('status', 'masuk')->count();
+        $permintaanMasuk = Permintaan::where('status', 'menunggu')->count();
 
-        $permintaanProses = Permintaan::where('status', 'proses')->count();
+        $permintaanProses = Permintaan::where('status', 'diproses')->count();
 
         return view('admin.dashboard', compact('totalBahan', 'permintaanMasuk', 'permintaanProses'));
     }
@@ -117,15 +117,19 @@ class AdminController extends Controller
         return view('admin.permintaan.index', ['permintaan' => $permintaan]);
     }
 
+
     public function action_detail_permintaan($id)
     {
-        $permintaan = Permintaan::find($id);
-        $detail = PermintaanDetail::where('permintaan_id', $id)->get();
-        return view('admin.permintaan.detail', [
-            'permintaan' => $permintaan,
-            'detail' => $detail
-        ]);
+        $permintaan = Permintaan::findOrFail($id);
+        $detail = PermintaanDetail::with('bahan')
+            ->where('permintaan_id', $id)
+            ->get();
+
+        return view('admin.permintaan.detail', compact('permintaan', 'detail'));
     }
+
+
+
 
     public function action_proses_permintaan(Request $request, $id)
     {

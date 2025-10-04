@@ -77,11 +77,11 @@ class ClientController extends Controller
 
     public function action_detail_permintaan($id)
     {
-        $permintaan = Permintaan::find($id);
-        $detail = PermintaanDetail::where('permintaan_id', $id)->get();
-        return view('client.permintaan.detail', [
-            'permintaan' => $permintaan,
-            'detail' => $detail
-        ]);
+        $permintaan = Permintaan::findOrFail($id);
+        $detail = PermintaanDetail::with('bahan')
+            ->where('permintaan_id', $id)
+            ->get();
+
+        return view('client.permintaan.detail', compact('permintaan', 'detail'));
     }
 }
