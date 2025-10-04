@@ -15,12 +15,10 @@ class AdminController extends Controller
     public function index()
     {
         $totalBahan = BahanBaku::count();
-
+        $totalKadaluarsa = BahanBaku::where('status', 'kadaluarsa')->count();
         $permintaanMasuk = Permintaan::where('status', 'menunggu')->count();
 
-        $permintaanProses = Permintaan::where('status', 'diproses')->count();
-
-        return view('admin.dashboard', compact('totalBahan', 'permintaanMasuk', 'permintaanProses'));
+        return view('admin.dashboard', compact('totalBahan', 'totalKadaluarsa', 'permintaanMasuk'));
     }
 
     public function index_bahan()
@@ -75,10 +73,10 @@ class AdminController extends Controller
         $validator = Validator::make($request->all(), [
             'nama' => 'required',
             'kategori' => 'required',
-            'jumlah' => 'required|min:0',
+            'jumlah' => 'required|integer|min:0',
             'satuan' => 'required',
-            'tanggal_masuk' => 'required',
-            'tanggal_kadaluarsa' => 'required',
+            'tanggal_masuk' => 'required|date',
+            'tanggal_kadaluarsa' => 'required|date',
         ]);
 
         if ($validator->fails()) {
@@ -89,17 +87,26 @@ class AdminController extends Controller
 
         $bahan = BahanBaku::findOrFail($id);
 
-        $bahan->update([
-            'nama' => $request->nama,
-            'kategori' => $request->kategori,
-            'jumlah' => $request->jumlah,
-            'satuan' => $request->satuan,
-            'tanggal_masuk' => $request->tanggal_masuk,
-            'tanggal_kadaluarsa' => $request->tanggal_kadaluarsa,
-        ]);
+        $bahan->nama = $request->nama;
+        $bahan->kategori = $request->kategori;
+        $bahan->jumlah = $request->jumlah;
+        $bahan->satuan = $request->satuan;
+        $bahan->tanggal_masuk = $request->tanggal_masuk;
+        $bahan->tanggal_kadaluarsa = $request->tanggal_kadaluarsa;
+
+        if ($bahan->jumlah == 0) {
+            $bahan->status = 'habis';
+        } elseif ($bahan->tanggal_kadaluarsa < now()->toDateString()) {
+            $bahan->status = 'kadaluarsa';
+        } else {
+            $bahan->status = 'tersedia';
+        }
+
+        $bahan->save();
 
         return redirect('/admin/bahan')->with('success', 'Data bahan berhasil diperbarui!');
     }
+
 
 
     public function action_delete_bahan($id)

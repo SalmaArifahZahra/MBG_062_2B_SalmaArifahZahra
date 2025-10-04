@@ -145,19 +145,20 @@
                             <h2>{{ $totalBahan }}</h2>
                         </div>
                     </div>
+
+                    <div class="col-md-4">
+                        <div class="card card-dashboard p-3 bg-danger text-white">
+                            <h5>Total Kadaluarsa</h5>
+                            <h2>{{ $totalKadaluarsa }}</h2>
+                        </div>
+                    </div>
+
                     <div class="col-md-4">
                         <div class="card card-dashboard p-3 bg-success text-white">
                             <h5>Permintaan Masuk</h5>
                             <h2>{{ $permintaanMasuk }}</h2>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="card card-dashboard p-3 bg-warning text-dark">
-                            <h5>Sedang Diproses</h5>
-                            <h2>{{ $permintaanProses }}</h2>
-                        </div>
-                    </div>
-
                 </div>
             @endif
 
