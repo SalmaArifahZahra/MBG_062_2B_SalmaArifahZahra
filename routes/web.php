@@ -24,5 +24,8 @@ Route::middleware(['auth', 'role:gudang'])->group(function () {
         Route::get('/admin/bahan/tambah', 'index_tambah_bahan');
         Route::post('/admin/bahan/tambah', 'action_tambah_bahan');
 
+        Route::get('/admin/bahan/{id}/edit', 'action_edit_bahan');
+        Route::post('/admin/bahan/{id}/update', 'action_update_bahan');
+        Route::delete('/admin/bahan/{id}', 'action_delete_bahan');
     });
 });
