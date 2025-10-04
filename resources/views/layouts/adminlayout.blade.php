@@ -103,7 +103,6 @@
     <div class="header">
         <h4>Sistem Pemantauan MBG</h4>
         <div>
-            <span>{{ Auth::user()->full_name }}</span>
             <button id="btnLogout" class="btn btn-outline-light btn-logout ms-3">Logout</button>
         </div>
     </div>

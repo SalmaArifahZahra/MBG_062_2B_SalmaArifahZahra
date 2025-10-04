@@ -1,11 +1,16 @@
 @extends('layouts.clientlayout')
 @section('content')
-<div class="container">
-    <h3>Permintaan Saya</h3>
-    <a href="/client/permintaan/tambah" class="btn btn-primary mb-3">+ Buat Permintaan</a>
+<div class="container-fluid mt-5 ms-0 ps-4">
+    <h3>Permintaan Data Bahan</h3>
+    <a href="/client/permintaan/tambah" class="btn btn-primary mb-3">+ Tambah Permintaan</a>
     <table class="table table-bordered">
         <tr>
-            <th>ID</th><th>Tanggal Masak</th><th>Menu</th><th>Porsi</th><th>Status</th><th>Aksi</th>
+            <th>ID</th>
+            <th>Tanggal Masak</th>
+            <th>Menu</th>
+            <th>Porsi</th>
+            <th>Status</th>
+            <th>Aksi</th>
         </tr>
         @foreach($permintaan as $p)
         <tr>

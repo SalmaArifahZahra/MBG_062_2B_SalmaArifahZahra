@@ -35,7 +35,6 @@ Route::middleware(['auth', 'role:gudang'])->group(function () {
         Route::get('/admin/permintaan/{id}', 'action_detail_permintaan');
         Route::post('/admin/permintaan/{id}/proses', 'action_proses_permintaan');
     });
-
 });
 
 Route::middleware(['auth', 'role:dapur'])->group(function () {
@@ -44,7 +43,7 @@ Route::middleware(['auth', 'role:dapur'])->group(function () {
         Route::get('/client/home', 'index');
 
         Route::get('/client/permintaan', 'index_permintaan');
-
+        Route::get('/client/permintaan/tambah', 'index_tambah_permintaan');
+        Route::post('/client/permintaan/tambah', 'action_tambah_permintaan');
     });
 });
-
